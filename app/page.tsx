@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CareerTab from './components/CareerTab';
 import WorksTab from './components/WorksTab';
 import ContactTab from './components/ContactTab';
@@ -16,6 +16,14 @@ const NAV_ITEMS: { key: TabKey; label: string }[] = [
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabKey>('home');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <main
@@ -27,26 +35,28 @@ export default function Home() {
         background: '#000',
       }}
     >
-      {/* 1. 底层：Spline 3D 艺术交互场景 */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: 1,
-        }}
-      >
-        <iframe
-          src="https://my.spline.design/retrofuturismbganimation-Xq4eQdvzcRBAuWhRqmFk7Xdv/"
-          frameBorder="0"
-          width="100%"
-          height="100%"
-          style={{ border: 'none', display: 'block' }}
-          title="3D background"
-        />
-      </div>
+      {/* 1. 底层：Spline 3D 艺术交互场景（手机端隐藏，省性能） */}
+      {!isMobile && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            zIndex: 1,
+          }}
+        >
+          <iframe
+            src="https://my.spline.design/retrofuturismbganimation-Xq4eQdvzcRBAuWhRqmFk7Xdv/"
+            frameBorder="0"
+            width="100%"
+            height="100%"
+            style={{ border: 'none', display: 'block' }}
+            title="3D background"
+          />
+        </div>
+      )}
 
       {/* 2. 顶部导航条 */}
       <nav
@@ -58,8 +68,8 @@ export default function Home() {
           zIndex: 10,
           display: 'flex',
           justifyContent: 'center',
-          padding: '28px 0',
-          pointerEvents: 'none', // 容器穿透，按钮单独恢复
+          padding: 'clamp(16px, 4vw, 28px) 0',
+          pointerEvents: 'none',
         }}
       >
         <div
@@ -73,6 +83,9 @@ export default function Home() {
             WebkitBackdropFilter: 'blur(20px) saturate(160%)',
             border: '1px solid rgba(255, 255, 255, 0.08)',
             pointerEvents: 'auto',
+            flexWrap: 'wrap',
+            maxWidth: '92vw',
+            justifyContent: 'center',
           }}
         >
           {NAV_ITEMS.map((item) => {
@@ -83,17 +96,18 @@ export default function Home() {
                 onClick={() => setActiveTab(item.key)}
                 style={{
                   position: 'relative',
-                  padding: '9px 22px',
+                  padding: 'clamp(6px, 2vw, 9px) clamp(12px, 4vw, 22px)',
                   borderRadius: '999px',
                   border: 'none',
                   background: isActive ? '#00ffcc' : 'transparent',
                   color: isActive ? '#000' : 'rgba(255,255,255,0.7)',
                   fontFamily:
                     '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-                  fontSize: '0.92rem',
+                  fontSize: 'clamp(0.78rem, 2.5vw, 0.92rem)',
                   fontWeight: isActive ? 600 : 500,
                   letterSpacing: '0.3px',
                   cursor: 'pointer',
+                  whiteSpace: 'nowrap',
                   transition:
                     'background 0.45s cubic-bezier(0.65, 0, 0.35, 1), color 0.45s cubic-bezier(0.65, 0, 0.35, 1), transform 0.3s cubic-bezier(0.65, 0, 0.35, 1)',
                   transform: isActive ? 'scale(1)' : 'scale(0.97)',
@@ -132,8 +146,9 @@ export default function Home() {
           <div
             style={{
               position: 'absolute',
-              top: '12%',
+              top: '14%',
               left: '8%',
+              right: '8%',
               maxWidth: '550px',
               color: '#fff',
               fontFamily:
@@ -143,13 +158,14 @@ export default function Home() {
           >
             <h1
               style={{
-                fontSize: '2.6rem',
+                fontSize: 'clamp(1.6rem, 6vw, 2.6rem)',
                 fontWeight: 800,
                 letterSpacing: '1px',
                 lineHeight: 1.2,
               }}
             >
-              
+              Global Content Catalyst &<br />
+              AIGC Practitioner
             </h1>
           </div>
         </PageLayer>
