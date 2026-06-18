@@ -39,7 +39,7 @@ export default function Home() {
           zIndex: 1,
         }}
       >
-        <SplineBackground scene="https://prod.spline.design/UqzhksmPZzrSvypG/scene.splinecode" />
+        {/* <SplineBackground scene="https://prod.spline.design/UqzhksmPZzrSvypG/scene.splinecode" /> */}
       </div>
 
       {/* 2. 顶部导航条 */}
