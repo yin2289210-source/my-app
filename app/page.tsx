@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import SplineBackground from './components/SplineBackground';
 import CareerTab from './components/CareerTab';
 import WorksTab from './components/WorksTab';
 import ContactTab from './components/ContactTab';
@@ -39,7 +38,14 @@ export default function Home() {
           zIndex: 1,
         }}
       >
-        {/* <SplineBackground scene="https://prod.spline.design/UqzhksmPZzrSvypG/scene.splinecode" /> */}
+        <iframe
+          src="https://my.spline.design/retrofuturismbganimation-Xq4eQdvzcRBAuWhRqmFk7Xdv/"
+          frameBorder="0"
+          width="100%"
+          height="100%"
+          style={{ border: 'none', display: 'block' }}
+          title="3D background"
+        />
       </div>
 
       {/* 2. 顶部导航条 */}
@@ -143,8 +149,7 @@ export default function Home() {
                 lineHeight: 1.2,
               }}
             >
-              Global Content Catalyst &<br />
-              AIGC Practitioner
+              
             </h1>
           </div>
         </PageLayer>
