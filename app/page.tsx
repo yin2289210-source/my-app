@@ -25,6 +25,8 @@ export default function Home() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  const isHome = activeTab === 'home';
+
   return (
     <main
       style={{
@@ -57,6 +59,22 @@ export default function Home() {
           />
         </div>
       )}
+
+      {/* 1.5 灰色蒙版：非首页时淡入，遮住过亮的 3D 背景 */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 1,
+          background: 'rgba(0, 0, 0, 0.60)',
+          opacity: isHome ? 0 : 1,
+          transition: 'opacity 0.55s cubic-bezier(0.65, 0, 0.35, 1)',
+          pointerEvents: 'none',
+        }}
+      />
 
       {/* 2. 顶部导航条 */}
       <nav
@@ -142,7 +160,7 @@ export default function Home() {
         }}
       >
         {/* 首页：仅保留标题，移除宣言文案与联系按钮 */}
-        <PageLayer active={activeTab === 'home'}>
+        <PageLayer active={isHome}>
           <div
             style={{
               position: 'absolute',
@@ -164,8 +182,7 @@ export default function Home() {
                 lineHeight: 1.2,
               }}
             >
-              Global Content Catalyst &<br />
-              AIGC Practitioner
+              
             </h1>
           </div>
         </PageLayer>
