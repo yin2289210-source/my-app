@@ -1,7 +1,7 @@
 'use client';
 
-import Spline from '@splinetool/react-spline/next';
 import { useState } from 'react';
+import SplineBackground from './components/SplineBackground';
 import CareerTab from './components/CareerTab';
 import WorksTab from './components/WorksTab';
 import ContactTab from './components/ContactTab';
@@ -39,7 +39,7 @@ export default function Home() {
           zIndex: 1,
         }}
       >
-        <Spline scene="https://prod.spline.design/UqzhksmPZzrSvypG/scene.splinecode" />
+        <SplineBackground scene="https://prod.spline.design/UqzhksmPZzrSvypG/scene.splinecode" />
       </div>
 
       {/* 2. 顶部导航条 */}
